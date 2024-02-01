@@ -1,11 +1,18 @@
 <template>
   <v-app>
     <v-main>
-      <HelloWorld />
+      <TheAppBar />
     </v-main>
   </v-app>
 </template>
 
-<script setup lang="ts">
-  //
+<script lang="ts">
+import { defineComponent } from "vue";
+import TheAppBar from "./components/TheAppBar.vue";
+
+export default defineComponent({
+  components: {
+    TheAppBar,
+  },
+});
 </script>
