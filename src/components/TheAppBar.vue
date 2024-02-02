@@ -1,23 +1,22 @@
 <template>
   <v-app-bar :elevation="2">
-    <template #prepend>
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-    </template>
-
-    <v-app-bar-title>{{ title }}</v-app-bar-title>
+    <v-container class="d-flex flex-row align-center">
+      <v-app-bar-title>
+        {{ title }}
+      </v-app-bar-title>
+      <v-spacer />
+      <TheExpensesDialog />
+      <v-btn icon @click="$emit('open-income-dialog')" color="success">
+        <v-icon>mdi-cash-plus</v-icon>
+      </v-btn>
+    </v-container>
   </v-app-bar>
 </template>
 
-<script lang="ts">
-import { defineComponent } from "vue";
+<script setup lang="ts">
+import TheExpensesDialog from "./expenses/TheExpensesDialog.vue";
 
-export default defineComponent({
-  data() {
-    return {
-      title: "Money Tracker",
-    };
-  },
-});
+const title = "Money Tracker";
 </script>
 
 <style scoped></style>
