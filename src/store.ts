@@ -9,6 +9,11 @@ export const useStore = defineStore("store", () => {
   const selectedMonth = ref(null);
   const expensesCategories = reactive<CategoryData[]>([
     {
+      name: "Transport",
+      color: "brown",
+      icon: "mdi-bus-side",
+    },
+    {
       name: "Clothes",
       color: "deep-orange",
       icon: "mdi-lingerie",
@@ -39,7 +44,7 @@ export const useStore = defineStore("store", () => {
       icon: "mdi-paw",
     },
     {
-      name: "Market",
+      name: "Groceries",
       color: "blue",
       icon: "mdi-cart-outline",
     },
@@ -48,14 +53,26 @@ export const useStore = defineStore("store", () => {
       color: "light-blue",
       icon: "mdi-silverware-variant",
     },
+  ]);
+  const incomeCategories = reactive<CategoryData[]>([
     {
-      name: "Transport",
+      name: "Salary",
       color: "teal",
-      icon: "mdi-bus-side",
+      icon: "mdi-cash",
+    },
+    {
+      name: "Savings",
+      color: "green",
+      icon: "mdi-piggy-bank-outline",
+    },
+    {
+      name: "Extras",
+      color: "light-green-darken-1",
+      icon: "mdi-medal-outline",
     },
   ]);
 
-  return { selectedMonth, expensesCategories };
+  return { selectedMonth, expensesCategories, incomeCategories };
 });
 
 interface CategoryData {

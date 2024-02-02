@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn icon @click="toggleDialog(true)" color="error">
+    <v-btn icon @click="toggleDialog(true)" color="red">
       <v-icon size="large">mdi-cash-minus</v-icon>
     </v-btn>
     <BaseDialog

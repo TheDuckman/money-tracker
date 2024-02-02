@@ -6,7 +6,7 @@
       </v-app-bar-title>
       <v-spacer />
       <TheExpensesDialog />
-      <v-btn icon @click="$emit('open-income-dialog')" color="success">
+      <v-btn icon @click="$emit('open-income-dialog')" color="green">
         <v-icon>mdi-cash-plus</v-icon>
       </v-btn>
     </v-container>

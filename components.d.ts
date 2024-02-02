@@ -5,13 +5,14 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 export {}
 
-declare module 'vue' {
+declare module "vue" {
   export interface GlobalComponents {
-    BaseDatePicker: typeof import('./src/components/UI/BaseDatePicker.vue')['default']
-    BaseDialog: typeof import('./src/components/UI/BaseDialog.vue')['default']
-    HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
-    TheAppBar: typeof import('./src/components/TheAppBar.vue')['default']
-    TheDialog: (typeof import("./src/components/TheDialog.vue"))["default"]
-    TheExpensesDialog: typeof import('./src/components/expenses/TheExpensesDialog.vue')['default']
+    BaseDatePicker: (typeof import("./src/components/UI/BaseDatePicker.vue"))["default"];
+    BaseDialog: (typeof import("./src/components/UI/BaseDialog.vue"))["default"];
+    TableView: (typeof import("./src/components/TableView.vue"))["default"];
+    TheAppBar: (typeof import("./src/components/TheAppBar.vue"))["default"];
+    TheDialog: (typeof import("./src/components/TheDialog.vue"))["default"];
+    TheExpensesDialog: (typeof import("./src/components/expenses/TheExpensesDialog.vue"))["default"];
+    TheMonthSelector: (typeof import("./src/components/TheMonthSelector.vue"))["default"];
   }
 }
