@@ -1,20 +1,21 @@
 <template>
   <div>
-    <v-btn icon @click="dialogState = true" color="error">
+    <v-btn icon @click="toggleDialog(true)" color="error">
       <v-icon size="large">mdi-cash-minus</v-icon>
     </v-btn>
     <BaseDialog
       title="New Expense"
       icon="mdi-cash-minus"
       :dialogState="dialogState"
-      @close-dialog="dialogState = false"
-      @update:modelValue="dialogState = $event"
+      @close-dialog="toggleDialog(false)"
+      @update:modelValue="toggleDialog($event)"
     >
       <!-- CATEGORY & DATE-->
       <template #text-1>
         <h3>Date</h3>
         <v-container fluid>
           <BaseDatePicker @date-changed="updateDate" />
+          <v-divider class="mt-3"></v-divider>
         </v-container>
         <h3>Select category</h3>
         <v-container fluid>
@@ -38,29 +39,34 @@
             </v-col>
           </v-row>
         </v-container>
-      </template>
-      <!-- AMOUNT -->
-      <template #text-2>
+        <!-- AMOUNT -->
         <v-slide-y-transition>
           <div v-if="selectedCategory">
-            <v-divider class="mb-4"></v-divider>
             <h3>Enter amount</h3>
             <v-container fluid>
-              <v-text-field
-                v-model="amount"
-                type="number"
-                prefix="$"
-                variant="solo-filled"
-                single-line
-              ></v-text-field>
+              <v-divider class="mb-3"></v-divider>
+              <v-container fluid>
+                <v-text-field
+                  v-model="amount"
+                  type="number"
+                  prefix="$"
+                  variant="solo-filled"
+                  single-line
+                  hide-details
+                ></v-text-field>
+              </v-container>
             </v-container>
-            <v-divider></v-divider>
           </div>
         </v-slide-y-transition>
       </template>
+      <!-- BUTTONS -->
       <template #actions>
         <v-slide-y-transition>
-          <v-btn v-if="selectedCategory" color="success" size="x-large"
+          <v-btn
+            v-if="selectedCategory"
+            color="success"
+            size="x-large"
+            @click="createExpense"
             >Ok</v-btn
           >
         </v-slide-y-transition>
@@ -82,6 +88,12 @@ const store = useStore();
 
 // dialog
 const dialogState = ref(false);
+const toggleDialog = function (val: boolean) {
+  dialogState.value = val;
+  if (!val) {
+    clearData();
+  }
+};
 
 // category
 const expensesCategories: CategoryOption[] = reactive(
@@ -104,6 +116,11 @@ const selectCategory = function (selectedCategory: CategoryOption) {
     }
   });
 };
+const resetCategories = function () {
+  expensesCategories.forEach((cat) => {
+    cat.selected = false;
+  });
+};
 
 // amount
 const amount = ref(0);
@@ -112,5 +129,15 @@ const amount = ref(0);
 const date = ref(new Date());
 const updateDate = function (newDate: Date) {
   date.value = newDate;
+};
+
+// whole form
+const clearData = function () {
+  date.value = new Date();
+  amount.value = 0;
+  resetCategories();
+};
+const createExpense = function () {
+  toggleDialog(false);
 };
 </script>

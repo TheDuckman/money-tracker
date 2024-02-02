@@ -14,8 +14,6 @@
 </template>
 
 <script setup lang="ts">
-import TheExpensesDialog from "./expenses/TheExpensesDialog.vue";
-
 const title = "Money Tracker";
 </script>
 

@@ -4,6 +4,7 @@
     readonly
     variant="solo-filled"
     single-line
+    hide-details
   >
     <v-menu activator="parent" transition="slide-y-transition">
       <v-date-picker
