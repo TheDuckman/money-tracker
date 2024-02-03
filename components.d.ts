@@ -5,14 +5,24 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 export {}
 
-declare module "vue" {
+declare module 'vue' {
   export interface GlobalComponents {
-    BaseDatePicker: (typeof import("./src/components/UI/BaseDatePicker.vue"))["default"];
-    BaseDialog: (typeof import("./src/components/UI/BaseDialog.vue"))["default"];
-    TableView: (typeof import("./src/components/TableView.vue"))["default"];
-    TheAppBar: (typeof import("./src/components/TheAppBar.vue"))["default"];
-    TheDialog: (typeof import("./src/components/TheDialog.vue"))["default"];
-    TheExpensesDialog: (typeof import("./src/components/expenses/TheExpensesDialog.vue"))["default"];
-    TheMonthSelector: (typeof import("./src/components/TheMonthSelector.vue"))["default"];
+    BaseDatePicker: typeof import('./src/components/UI/BaseDatePicker.vue')['default']
+    BaseDialog: typeof import('./src/components/UI/BaseDialog.vue')['default']
+    BaseReportPage: typeof import('./src/components/UI/BaseReportPage.vue')['default']
+    copy: (typeof import("./src/components/charts/ExpensesBarChart copy.vue"))["default"]
+    ExpensesBarChart: (typeof import("./src/components/charts/ExpensesBarChart.vue"))["default"]
+    ExpensesPieChart: typeof import('./src/components/charts/ExpensesPieChart.vue')['default']
+    IncomePieChart: typeof import('./src/components/charts/IncomePieChart.vue')['default']
+    MonthSelector: typeof import('./src/components/MonthSelector.vue')['default']
+    NewRecordTemplate: typeof import('./src/components/NewRecordTemplate.vue')['default']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
+    TableView: (typeof import("./src/components/TableView.vue"))["default"]
+    TheAppBar: (typeof import("./src/components/TheAppBar.vue"))["default"]
+    TheDialog: (typeof import("./src/components/TheDialog.vue"))["default"]
+    TheDrawer: typeof import('./src/components/TheDrawer.vue')['default']
+    TheIncomeDialog: (typeof import("./src/components/income/TheIncomeDialog.vue"))["default"]
+    TheRecordsDialog: (typeof import("./src/components/TheRecordsDialog.vue"))["default"]
   }
 }

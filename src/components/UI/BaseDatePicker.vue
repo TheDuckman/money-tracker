@@ -9,7 +9,7 @@
     <v-menu activator="parent" transition="slide-y-transition">
       <v-date-picker
         show-adjacent-months
-        color="red"
+        :color="color"
         v-model="date"
         :max="today"
       />
@@ -21,7 +21,16 @@
 import { watch, onMounted } from "vue";
 import { computed, ref } from "vue";
 
+const props = defineProps({
+  color: {
+    type: String,
+    default: null,
+  },
+});
 const emit = defineEmits(["date-changed"]);
+
+const color = computed(() => props.color);
+
 const today = new Date();
 const date = ref(new Date());
 const formattedDate = computed(() => date.value.toDateString());

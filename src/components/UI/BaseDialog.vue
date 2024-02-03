@@ -1,5 +1,5 @@
 <template>
-  <v-dialog width="600" v-model="dialog">
+  <v-dialog width="600" v-model="dialog" scrollable>
     <v-card>
       <v-card-title primary-title class="d-flex align-center">
         <v-icon v-if="icon" class="mr-2">{{ icon }}</v-icon>
@@ -15,7 +15,7 @@
       <v-card-text v-if="$slots['text-2']">
         <slot name="text-2"></slot>
       </v-card-text>
-      <v-card-actions>
+      <v-card-actions class="d-flex justify-center">
         <slot name="actions"></slot>
       </v-card-actions>
     </v-card>
