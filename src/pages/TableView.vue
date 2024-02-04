@@ -13,14 +13,14 @@
     <template #left>
       <RecordsExpansionPanels
         :categories="expensesCategories"
-        :records="expenseRecords"
+        :records="filteredExpenseRecords"
         sumColor="red"
       />
     </template>
     <template #right>
       <RecordsExpansionPanels
         :categories="incomeCategories"
-        :records="incomeRecords"
+        :records="filteredIncomeRecords"
         sumColor="green"
       />
     </template>
@@ -44,5 +44,16 @@ const expenseRecords = computed(() =>
 );
 const incomeRecords = computed(() =>
   records.value.filter((rc) => rc.type === RecordTypes.INCOME),
+);
+const selectedDate = computed(() => store.selectedDate);
+const filteredExpenseRecords = computed(() =>
+  expenseRecords.value.filter((it) => {
+    return it.date.getMonth() === selectedDate.value.getMonth();
+  }),
+);
+const filteredIncomeRecords = computed(() =>
+  incomeRecords.value.filter((it) => {
+    return it.date.getMonth() === selectedDate.value.getMonth();
+  }),
 );
 </script>
