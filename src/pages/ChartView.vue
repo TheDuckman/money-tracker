@@ -17,9 +17,9 @@
       />
       <ExpensesPieChart
         v-if="expensesChartType === ChartTypes.PIE"
-        :records="filteredExpenseRecords"
+        :records="expenseRecords"
       />
-      <ExpensesBarChart v-else :records="filteredExpenseRecords" />
+      <ExpensesBarChart v-else :records="expenseRecords" />
     </template>
     <template #right>
       <ChartTypeButtons
@@ -28,9 +28,9 @@
       />
       <IncomePieChart
         v-if="incomeChartType === ChartTypes.PIE"
-        :records="filteredIncomeRecords"
+        :records="incomeRecords"
       />
-      <IncomeBarChart v-else :records="filteredIncomeRecords" />
+      <IncomeBarChart v-else :records="incomeRecords" />
     </template>
   </BaseReportPage>
 </template>
@@ -47,24 +47,10 @@ const expensesChartType = ref(ChartTypes.PIE);
 const incomeChartType = ref(ChartTypes.PIE);
 
 // record
-const records = computed(() => store.records);
 const expenseRecords = computed(() =>
-  records.value.filter((rc) => rc.type === RecordTypes.EXPENSE),
+  store.geSelectedMonthRecordsByType(RecordTypes.EXPENSE),
 );
 const incomeRecords = computed(() =>
-  records.value.filter((rc) => rc.type === RecordTypes.INCOME),
+  store.geSelectedMonthRecordsByType(RecordTypes.INCOME),
 );
-const filteredExpenseRecords = computed(() =>
-  expenseRecords.value.filter((it) => {
-    return it.date.getMonth() === selectedDate.value.getMonth();
-  }),
-);
-const filteredIncomeRecords = computed(() =>
-  incomeRecords.value.filter((it) => {
-    return it.date.getMonth() === selectedDate.value.getMonth();
-  }),
-);
-
-// date
-const selectedDate = computed(() => store.selectedDate);
 </script>

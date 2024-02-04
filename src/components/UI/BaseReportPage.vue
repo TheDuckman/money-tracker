@@ -1,7 +1,7 @@
 <template>
   <v-container>
-    <h1>
-      <v-icon :color="color">{{ icon }}</v-icon
+    <h1 class="d-flex flex-row">
+      <v-icon :color="color" class="mr-2">{{ icon }}</v-icon
       >{{ title }}
     </h1>
     <MonthSelector />
@@ -25,6 +25,7 @@
         </v-row>
       </v-card-text>
     </v-card>
+    <TotalAmountAlert leftColor="red" rightColor="green" />
   </v-container>
 </template>
 

@@ -1,6 +1,8 @@
 <template>
   <v-container>
-    <h1><v-icon color="red">mdi-cash-minus</v-icon> New Expense</h1>
+    <h1 class="d-flex flex-row">
+      <v-icon color="red" class="mr-2">mdi-cash-minus</v-icon> New Expense
+    </h1>
     <v-card class="mt-2">
       <v-card-text>
         <NewRecordTemplate color="red" :type="RecordTypes.EXPENSE" />

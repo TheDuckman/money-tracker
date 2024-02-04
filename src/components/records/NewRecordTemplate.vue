@@ -72,8 +72,8 @@
 
 <script setup lang="ts">
 import { ref, reactive, computed, defineProps } from "vue";
-import { RecordTypes } from "../utils/enums";
-import { useStore } from "../store";
+import { RecordTypes } from "../../utils/enums";
+import { useStore } from "../../store";
 interface CategoryOption {
   name: string;
   color: string;

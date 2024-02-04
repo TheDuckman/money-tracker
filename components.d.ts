@@ -17,9 +17,9 @@ declare module 'vue' {
     IncomeBarChart: typeof import('./src/components/charts/IncomeBarChart.vue')['default']
     IncomePieChart: typeof import('./src/components/charts/IncomePieChart.vue')['default']
     MonthSelector: typeof import('./src/components/MonthSelector.vue')['default']
-    NewRecordTemplate: typeof import('./src/components/NewRecordTemplate.vue')['default']
+    NewRecordTemplate: typeof import('./src/components/records/NewRecordTemplate.vue')['default']
     NoDataDiv: typeof import('./src/components/UI/NoDataDiv.vue')['default']
-    RecordsExpansionPanels: typeof import('./src/components/UI/RecordsExpansionPanels.vue')['default']
+    RecordsExpansionPanels: typeof import('./src/components/records/RecordsExpansionPanels.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableView: (typeof import("./src/components/TableView.vue"))["default"]
@@ -28,5 +28,6 @@ declare module 'vue' {
     TheDrawer: typeof import('./src/components/TheDrawer.vue')['default']
     TheIncomeDialog: (typeof import("./src/components/income/TheIncomeDialog.vue"))["default"]
     TheRecordsDialog: (typeof import("./src/components/TheRecordsDialog.vue"))["default"]
+    TotalAmountAlert: typeof import('./src/components/records/TotalAmountAlert.vue')['default']
   }
 }
