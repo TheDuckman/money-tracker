@@ -4,11 +4,9 @@
       <TheDrawer />
       <TheSnackbar />
       <v-container>
-        <router-view v-slot="{ Component }">
-          <transition name="fade" mode="out-in">
-            <component :is="Component"></component>
-          </transition>
-        </router-view>
+        <v-fade-transition>
+          <router-view></router-view>
+        </v-fade-transition>
       </v-container>
     </v-main>
     <v-footer class="justify-end" app>
@@ -35,15 +33,3 @@ onBeforeMount(() => {
   store.generateRecords(25, RecordTypes.INCOME);
 });
 </script>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.1s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

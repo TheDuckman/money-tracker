@@ -15,22 +15,36 @@
         :chartType="expensesChartType"
         @change-chart="expensesChartType = $event"
       />
-      <ExpensesPieChart
-        v-if="expensesChartType === ChartTypes.PIE"
-        :records="expenseRecords"
-      />
-      <ExpensesBarChart v-else :records="expenseRecords" />
+      <v-fade-transition>
+        <ExpensesPieChart
+          v-if="expensesChartType === ChartTypes.PIE"
+          :records="expenseRecords"
+        />
+      </v-fade-transition>
+      <v-fade-transition>
+        <ExpensesBarChart
+          v-if="expensesChartType === ChartTypes.BAR"
+          :records="expenseRecords"
+        />
+      </v-fade-transition>
     </template>
     <template #right>
       <ChartTypeButtons
         :chartType="incomeChartType"
         @change-chart="incomeChartType = $event"
       />
-      <IncomePieChart
-        v-if="incomeChartType === ChartTypes.PIE"
-        :records="incomeRecords"
-      />
-      <IncomeBarChart v-else :records="incomeRecords" />
+      <v-fade-transition>
+        <IncomePieChart
+          v-if="incomeChartType === ChartTypes.PIE"
+          :records="incomeRecords"
+        />
+      </v-fade-transition>
+      <v-fade-transition>
+        <IncomeBarChart
+          v-if="incomeChartType === ChartTypes.BAR"
+          :records="incomeRecords"
+        />
+      </v-fade-transition>
     </template>
   </BaseReportPage>
 </template>
