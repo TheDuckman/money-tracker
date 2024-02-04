@@ -12,7 +12,7 @@
             density="compact"
             label
             :class="`text-${category.color} font-weight-bold`"
-            >$ {{ totalByCategory(category.name) }}</v-chip
+            >{{ totalByCategory(category.name) }}</v-chip
           >
         </div>
       </v-expansion-panel-title>
@@ -27,7 +27,7 @@
                 <v-icon>mdi-circle-small</v-icon> {{ rec.description }}
                 <v-spacer></v-spacer>
                 <div :class="`text-${category.color} font-weight-medium`">
-                  $ {{ rec.amount }}
+                  {{ filterFormatCurrency(rec.amount) }}
                 </div>
               </div>
             </v-list-item-title>
@@ -45,6 +45,7 @@
 import { computed, defineProps } from "vue";
 import { sumBy } from "lodash";
 import { CategoryData, RecordData } from "@/utils/types";
+import { filterFormatCurrency } from "@/utils/functions";
 
 const props = defineProps({
   categories: {
@@ -64,7 +65,7 @@ const categories = computed(() => props.categories);
 const records = computed(() => props.records);
 
 const totalByCategory = function (category: string) {
-  return sumBy(filterExpenses(category), "amount").toFixed(2);
+  return filterFormatCurrency(sumBy(filterExpenses(category), "amount"));
 };
 
 const filterExpenses = function (category: string) {

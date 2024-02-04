@@ -28,6 +28,7 @@ declare module 'vue' {
     TheDrawer: typeof import('./src/components/TheDrawer.vue')['default']
     TheIncomeDialog: (typeof import("./src/components/income/TheIncomeDialog.vue"))["default"]
     TheRecordsDialog: (typeof import("./src/components/TheRecordsDialog.vue"))["default"]
+    TheSnackbar: typeof import('./src/components/UI/TheSnackbar.vue')['default']
     TotalAmountAlert: typeof import('./src/components/records/TotalAmountAlert.vue')['default']
   }
 }

@@ -23,6 +23,7 @@
         >
         </v-list-item>
       </template>
+      <v-list-item @click="emitter.emit('success-toast')"> TESTE</v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
@@ -31,6 +32,8 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { RouteItemTypes } from "../utils/enums";
+import useEmitter from "@/composables/useEmitter";
+const emitter = useEmitter();
 
 const router = useRouter();
 const routeTypes = computed(() => Object.values(RouteItemTypes) as string[]);

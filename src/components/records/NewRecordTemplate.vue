@@ -75,6 +75,7 @@
 import { ref, reactive, computed, defineProps } from "vue";
 import { RecordTypes } from "../../utils/enums";
 import { useStore } from "../../store";
+import useEmitter from "@/composables/useEmitter";
 interface CategoryOption {
   name: string;
   color: string;
@@ -95,6 +96,7 @@ const props = defineProps({
 const color = computed(() => props.color);
 const type = computed(() => props.type);
 const store = useStore();
+const emitter = useEmitter();
 
 // category
 const categories = computed(() => {
@@ -149,7 +151,8 @@ const formComplete = computed(() => {
 });
 const clearData = function () {
   date.value = new Date();
-  amount.value = "0";
+  amount.value = "";
+  description.value = "";
   resetCategories();
 };
 const createExpense = function () {
@@ -160,6 +163,7 @@ const createExpense = function () {
     amount.value,
     description.value,
   );
+  emitter.emit("success-toast", "New record created");
   clearData();
 };
 </script>
