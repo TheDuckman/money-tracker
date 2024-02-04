@@ -18,4 +18,15 @@
   </v-app>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useStore } from "@/store";
+import { onBeforeMount } from "vue";
+import { RecordTypes } from "@/utils/enums";
+
+const store = useStore();
+
+onBeforeMount(() => {
+  store.generateRecords(25, RecordTypes.EXPENSE);
+  store.generateRecords(25, RecordTypes.INCOME);
+});
+</script>

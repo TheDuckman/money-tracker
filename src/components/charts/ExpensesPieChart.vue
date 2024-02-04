@@ -2,6 +2,9 @@
   <template v-if="records.length > 0">
     <GChart type="PieChart" :data="chartData" :options="chartOptions"></GChart>
   </template>
+  <template v-else>
+    <NoDataDiv icon="mdi-chart-pie" />
+  </template>
 </template>
 
 <script setup lang="ts">

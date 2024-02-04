@@ -11,26 +11,38 @@
     rightTitle="Income"
   >
     <template #left>
-      <ExpensesPieChart :records="expenseRecords" />
+      <ExpensesPieChart :records="filteredExpenseRecords" />
     </template>
     <template #right>
-      <IncomePieChart :records="incomeRecords" />
+      <IncomePieChart :records="filteredIncomeRecords" />
     </template>
   </BaseReportPage>
 </template>
 
 <script setup lang="ts">
-import { reactive, onBeforeMount } from "vue";
 import { useStore } from "../store";
-import { RecordData } from "@/utils/types";
 import { RecordTypes } from "@/utils/enums";
+import { computed } from "vue";
 
 const store = useStore();
-let expenseRecords = reactive<RecordData[]>([]);
-let incomeRecords = reactive<RecordData[]>([]);
+// record
+const records = computed(() => store.records);
+const expenseRecords = computed(() =>
+  records.value.filter((rc) => rc.type === RecordTypes.EXPENSE),
+);
+const incomeRecords = computed(() =>
+  records.value.filter((rc) => rc.type === RecordTypes.INCOME),
+);
 
-onBeforeMount(() => {
-  expenseRecords = store.generateRecords(25, RecordTypes.EXPENSE);
-  incomeRecords = store.generateRecords(25, RecordTypes.INCOME);
-});
+const selectedDate = computed(() => store.selectedDate);
+const filteredExpenseRecords = computed(() =>
+  expenseRecords.value.filter((it) => {
+    return it.date.getMonth() === selectedDate.value.getMonth();
+  }),
+);
+const filteredIncomeRecords = computed(() =>
+  incomeRecords.value.filter((it) => {
+    return it.date.getMonth() === selectedDate.value.getMonth();
+  }),
+);
 </script>
