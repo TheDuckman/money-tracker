@@ -7,11 +7,17 @@
     single-line
     hide-details
   >
-    <v-menu activator="parent" transition="slide-y-transition">
+    <v-menu
+      v-model="menu"
+      activator="parent"
+      transition="slide-y-transition"
+      :close-on-content-click="false"
+    >
       <v-date-picker
+        v-model="date"
+        @update:modelValue="menu = false"
         show-adjacent-months
         :color="color"
-        v-model="date"
         :max="today"
       />
     </v-menu>
@@ -31,6 +37,8 @@ const props = defineProps({
 const emit = defineEmits(["date-changed"]);
 
 const color = computed(() => props.color);
+
+const menu = ref(false);
 
 const today = new Date();
 const date = ref(new Date());
