@@ -36,18 +36,19 @@
       <v-container fluid>
         <v-text-field
           v-model="amount"
-          type="number"
-          prefix="$"
+          prepend-inner-icon="mdi-currency-usd"
           variant="solo-filled"
           single-line
           hide-details
-        ></v-text-field>
+        >
+        </v-text-field>
       </v-container>
       <v-divider class="mb-3"></v-divider>
       <h3>Description</h3>
       <v-container fluid>
         <v-text-field
           v-model="description"
+          prepend-inner-icon="mdi-text"
           variant="solo-filled"
           single-line
           hide-details
@@ -131,7 +132,7 @@ const resetCategories = function () {
 };
 
 // amount
-const amount = ref("0");
+const amount = ref("");
 
 // description
 const description = ref("");

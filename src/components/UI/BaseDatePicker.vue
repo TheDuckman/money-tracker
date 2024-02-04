@@ -1,6 +1,7 @@
 <template>
   <v-text-field
     :value="formattedDate"
+    prepend-inner-icon="mdi-calendar-month"
     readonly
     variant="solo-filled"
     single-line

@@ -25,7 +25,7 @@
         </v-row>
       </v-card-text>
     </v-card>
-    <TotalAmountAlert leftColor="red" rightColor="green" />
+    <TotalAmountAlert />
   </v-container>
 </template>
 
