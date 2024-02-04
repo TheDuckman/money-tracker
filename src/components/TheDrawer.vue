@@ -23,7 +23,6 @@
         >
         </v-list-item>
       </template>
-      <v-list-item @click="emitter.emit('success-toast')"> TESTE</v-list-item>
     </v-list>
   </v-navigation-drawer>
 </template>
