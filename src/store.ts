@@ -91,7 +91,7 @@ export const useStore = defineStore("store", () => {
     date: Date,
     type: string,
     category: string,
-    amount: string,
+    amount: number,
     description: string,
   ) {
     records.push({
@@ -99,7 +99,7 @@ export const useStore = defineStore("store", () => {
       date,
       type,
       category,
-      amount: Number(amount),
+      amount: amount,
       description,
     });
   };

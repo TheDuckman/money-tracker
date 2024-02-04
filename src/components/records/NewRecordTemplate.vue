@@ -40,6 +40,7 @@
           variant="solo-filled"
           single-line
           hide-details
+          v-maska:[options]
         >
         </v-text-field>
       </v-container>
@@ -76,6 +77,7 @@ import { ref, reactive, computed, defineProps } from "vue";
 import { RecordTypes } from "../../utils/enums";
 import { useStore } from "../../store";
 import useEmitter from "@/composables/useEmitter";
+import { vMaska } from "maska";
 interface CategoryOption {
   name: string;
   color: string;
@@ -135,6 +137,12 @@ const resetCategories = function () {
 
 // amount
 const amount = ref("");
+const numericAmount = computed(() => Number(amount.value.replaceAll(",", "")));
+const options = reactive({
+  mask: "###,###.##",
+  eager: true,
+  reversed: true,
+});
 
 // description
 const description = ref("");
@@ -147,7 +155,7 @@ const updateDate = function (newDate: Date) {
 
 // whole form
 const formComplete = computed(() => {
-  return !!description.value && Number(amount.value) > 0 && selectedCategory;
+  return !!description.value && numericAmount.value > 0 && selectedCategory;
 });
 const clearData = function () {
   date.value = new Date();
@@ -160,7 +168,7 @@ const createExpense = function () {
     date.value,
     type.value,
     selectedCategory.value ? selectedCategory.value.name : "",
-    amount.value,
+    numericAmount.value,
     description.value,
   );
   emitter.emit("success-toast", "New record created");
