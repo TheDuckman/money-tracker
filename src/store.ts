@@ -103,6 +103,13 @@ export const useStore = defineStore("store", () => {
       description,
     });
   };
+  const geSelectedMonthRecordsByType = function (type: string) {
+    return records.filter(
+      (rc) =>
+        rc.type === type &&
+        rc.date.getMonth() === selectedDate.value.getMonth(),
+    );
+  };
 
   // fake data
   const getRandomCategory = function (type: string) {
@@ -141,5 +148,6 @@ export const useStore = defineStore("store", () => {
     records,
     addRecord,
     generateRecords,
+    geSelectedMonthRecordsByType,
   };
 });

@@ -8,7 +8,10 @@
         {{ category.name }}
         <v-spacer></v-spacer>
         <div class="mr-3">
-          <v-chip label :class="`text-${sumColor} font-weight-bold`"
+          <v-chip
+            density="compact"
+            label
+            :class="`text-${category.color} font-weight-bold`"
             >$ {{ totalByCategory(category.name) }}</v-chip
           >
         </div>
@@ -57,10 +60,8 @@ const props = defineProps({
     default: null,
   },
 });
-// const store = useStore();
 const categories = computed(() => props.categories);
 const records = computed(() => props.records);
-// const type = computed(() => props.type);
 
 const totalByCategory = function (category: string) {
   return sumBy(filterExpenses(category), "amount").toFixed(2);
