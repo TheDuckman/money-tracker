@@ -8,7 +8,10 @@
         {{ category.name }}
         <v-spacer></v-spacer>
         <div class="mr-3">
-          <v-chip label :class="`text-${sumColor} font-weight-bold`"
+          <v-chip
+            density="compact"
+            label
+            :class="`text-${category.color} font-weight-bold`"
             >$ {{ totalByCategory(category.name) }}</v-chip
           >
         </div>
