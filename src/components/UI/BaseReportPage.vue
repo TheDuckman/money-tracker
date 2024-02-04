@@ -7,7 +7,7 @@
     <MonthSelector />
     <v-card class="mt-2">
       <v-card-text>
-        <v-row no-gutters>
+        <v-row>
           <v-col cols="6">
             <h2>
               <v-icon class="mr-2" :color="leftColor">{{ leftIcon }}</v-icon

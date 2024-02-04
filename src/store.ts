@@ -115,12 +115,12 @@ export const useStore = defineStore("store", () => {
       return incomeCategories[index].name;
     }
   };
-  const generateRecords = function (qty: number, type: string): RecordData[] {
-    const records: RecordData[] = [];
+  const generateRecords = function (qty: number, type: string): void {
+    const newRecords: RecordData[] = [];
     [...Array(qty)].forEach(() => {
       const category = getRandomCategory(type);
       const baseAmount = Math.random() * 500;
-      records.push({
+      newRecords.push({
         id: uuid.v1(),
         date: new Date(),
         type,
@@ -129,8 +129,7 @@ export const useStore = defineStore("store", () => {
         description: uuid.v1(),
       });
     });
-
-    return records;
+    records.push(...newRecords);
   };
 
   return {

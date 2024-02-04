@@ -16,6 +16,8 @@ declare module 'vue' {
     IncomePieChart: typeof import('./src/components/charts/IncomePieChart.vue')['default']
     MonthSelector: typeof import('./src/components/MonthSelector.vue')['default']
     NewRecordTemplate: typeof import('./src/components/NewRecordTemplate.vue')['default']
+    NoDataDiv: typeof import('./src/components/UI/NoDataDiv.vue')['default']
+    RecordsExpansionPanels: typeof import('./src/components/UI/RecordsExpansionPanels.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableView: (typeof import("./src/components/TableView.vue"))["default"]
