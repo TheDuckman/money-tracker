@@ -1,11 +1,10 @@
 <template>
   <v-navigation-drawer>
     <v-list>
-      <v-list-item
-        prepend-avatar="@/assets/coin.png"
-        title="Money Tracker"
-        subtitle="By Gabriel Pato"
-      ></v-list-item>
+      <v-list-item prepend-avatar="@/assets/coin.png">
+        <v-list-item-title class="text-orange">Money Tracker</v-list-item-title>
+        <v-list-item-subtitle>By Gabriel Pato</v-list-item-subtitle>
+      </v-list-item>
     </v-list>
 
     <v-divider></v-divider>
