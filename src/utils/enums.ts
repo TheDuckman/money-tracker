@@ -8,6 +8,11 @@ export enum RouteItemTypes {
   ACTIONS = "ACTIONS",
 }
 
+export enum ChartTypes {
+  BAR = "BAR",
+  PIE = "PIE",
+}
+
 export enum ExpensesHexColors {
   "deep-orange" = "#FF5722",
   red = "#F44336",
