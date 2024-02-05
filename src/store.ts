@@ -103,6 +103,30 @@ export const useStore = defineStore("store", () => {
       description,
     });
   };
+  const alterRecord = function (
+    id: string,
+    date: Date,
+    type: string,
+    category: string,
+    amount: number,
+    description: string,
+  ) {
+    const recordIndex = records.findIndex((it) => it.id === id);
+    records.splice(recordIndex, 1, {
+      id,
+      date,
+      type,
+      category,
+      amount: amount,
+      description,
+    })[recordIndex];
+  };
+  const removeRecord = function (recordId: string) {
+    const recordIndex = records.findIndex((it) => it.id === recordId);
+    if (recordIndex >= 0) {
+      records.splice(recordIndex, 1);
+    }
+  };
   const geSelectedMonthRecordsByType = function (type: string) {
     return records.filter(
       (rc) =>
@@ -133,7 +157,7 @@ export const useStore = defineStore("store", () => {
         type,
         category,
         amount: Number(baseAmount.toFixed(2)),
-        description: uuid.v1(),
+        description: `${category} item`,
       });
     });
     records.push(...newRecords);
@@ -147,6 +171,8 @@ export const useStore = defineStore("store", () => {
     incomeCategories,
     records,
     addRecord,
+    alterRecord,
+    removeRecord,
     generateRecords,
     geSelectedMonthRecordsByType,
   };

@@ -1,4 +1,9 @@
 <template>
+  <RemoveRecordBtn
+    v-if="record"
+    :record="record"
+    @record-removed="recordRemoved"
+  />
   <!-- DATE -->
   <h3>Date</h3>
   <v-container>
@@ -16,7 +21,7 @@
         :value="item"
       >
         <v-btn
-          @click="selectCategory(item)"
+          @click="selectCategory(item.name)"
           :color="item.color"
           :prepend-icon="item.icon"
           stacked
@@ -59,44 +64,80 @@
   </v-slide-y-transition>
   <!-- BUTTONS -->
   <v-slide-y-transition>
-    <v-container v-if="selectedCategory" class="justify-center d-flex">
+    <v-container
+      v-if="selectedCategory && !record"
+      class="justify-center d-flex"
+    >
       <v-btn
         :disabled="!formComplete"
         color="success"
         size="x-large"
         variant="tonal"
-        @click="createExpense"
+        @click="createRecord"
         >Ok</v-btn
       >
+    </v-container>
+    <v-container v-else-if="selectedCategory && record">
+      <div class="justify-space-around d-flex">
+        <v-btn size="x-large" variant="tonal" @click="$emit('cancel')"
+          >Cancel</v-btn
+        >
+        <v-btn
+          size="x-large"
+          variant="tonal"
+          color="warning"
+          @click="alterRecord"
+        >
+          Alter record
+        </v-btn>
+      </div>
     </v-container>
   </v-slide-y-transition>
 </template>
 
 <script setup lang="ts">
-import { ref, reactive, computed, defineProps } from "vue";
+import {
+  ref,
+  reactive,
+  computed,
+  defineProps,
+  PropType,
+  defineEmits,
+} from "vue";
 import { RecordTypes } from "../../utils/enums";
+import { RecordData } from "../../utils/types";
 import { useStore } from "../../store";
 import useEmitter from "@/composables/useEmitter";
 import { vMaska } from "maska";
+import { onMounted } from "vue";
 interface CategoryOption {
   name: string;
   color: string;
   icon: string;
   selected: boolean;
 }
+const emit = defineEmits(["records-updated", "cancel"]);
 
 const props = defineProps({
   color: {
     type: String,
     default: null,
+    required: true,
   },
   type: {
     type: String,
     default: null,
+    required: true,
+  },
+  record: {
+    type: Object as PropType<RecordData>,
+    default: null,
+    required: false,
   },
 });
 const color = computed(() => props.color);
 const type = computed(() => props.type);
+const record = computed(() => props.record);
 const store = useStore();
 const emitter = useEmitter();
 
@@ -120,9 +161,9 @@ const categoryOptions: CategoryOption[] = reactive(
 const selectedCategory = computed(() =>
   categoryOptions.find((el) => el.selected),
 );
-const selectCategory = function (selectedCategory: CategoryOption) {
+const selectCategory = function (selectedCategory: string) {
   categoryOptions.forEach((cat) => {
-    if (cat.name === selectedCategory.name) {
+    if (cat.name === selectedCategory) {
       cat.selected = true;
     } else {
       cat.selected = false;
@@ -163,7 +204,7 @@ const clearData = function () {
   description.value = "";
   resetCategories();
 };
-const createExpense = function () {
+const createRecord = function () {
   store.addRecord(
     date.value,
     type.value,
@@ -174,4 +215,34 @@ const createExpense = function () {
   emitter.emit("success-toast", "New record created");
   clearData();
 };
+const alterRecord = function () {
+  store.alterRecord(
+    record.value.id,
+    date.value,
+    type.value,
+    selectedCategory.value ? selectedCategory.value.name : "",
+    numericAmount.value,
+    description.value,
+  );
+  emit("records-updated");
+  emitter.emit("success-toast", "Record altered");
+  clearData();
+};
+const recordRemoved = function () {
+  emit("records-updated");
+  clearData();
+};
+const fillOutForm = function () {
+  selectCategory(record.value.category);
+  date.value = record.value.date;
+  description.value = record.value.description;
+  amount.value = record.value.amount.toFixed(2);
+};
+
+// lifecycle hooks
+onMounted(() => {
+  if (record.value) {
+    fillOutForm();
+  }
+});
 </script>

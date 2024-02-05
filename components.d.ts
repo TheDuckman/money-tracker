@@ -18,7 +18,6 @@ declare module 'vue' {
     IncomeBarChart: typeof import('./src/components/charts/IncomeBarChart.vue')['default']
     IncomePieChart: typeof import('./src/components/charts/IncomePieChart.vue')['default']
     MonthSelector: typeof import('./src/components/MonthSelector.vue')['default']
-    NewRecordTemplate: typeof import('./src/components/records/NewRecordTemplate.vue')['default']
     NoDataDiv: typeof import('./src/components/UI/NoDataDiv.vue')['default']
     RecordForm: typeof import('./src/components/records/RecordForm.vue')['default']
     RecordsExpansionPanels: typeof import('./src/components/records/RecordsExpansionPanels.vue')['default']
