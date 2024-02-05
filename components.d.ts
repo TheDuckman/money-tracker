@@ -7,6 +7,7 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AlterRecordDialog: typeof import('./src/components/records/AlterRecordDialog.vue')['default']
     BaseDatePicker: typeof import('./src/components/UI/BaseDatePicker.vue')['default']
     BaseDialog: typeof import('./src/components/UI/BaseDialog.vue')['default']
     BaseReportPage: typeof import('./src/components/UI/BaseReportPage.vue')['default']
@@ -19,7 +20,9 @@ declare module 'vue' {
     MonthSelector: typeof import('./src/components/MonthSelector.vue')['default']
     NewRecordTemplate: typeof import('./src/components/records/NewRecordTemplate.vue')['default']
     NoDataDiv: typeof import('./src/components/UI/NoDataDiv.vue')['default']
+    RecordForm: typeof import('./src/components/records/RecordForm.vue')['default']
     RecordsExpansionPanels: typeof import('./src/components/records/RecordsExpansionPanels.vue')['default']
+    RemoveRecordBtn: typeof import('./src/components/records/RemoveRecordBtn.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableView: (typeof import("./src/components/TableView.vue"))["default"]
