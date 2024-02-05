@@ -5,7 +5,7 @@
     </h1>
     <v-card class="mt-2">
       <v-card-text>
-        <NewRecordTemplate color="green" :type="RecordTypes.INCOME" />
+        <RecordForm color="green" :type="RecordTypes.INCOME" />
       </v-card-text>
     </v-card>
   </v-container>
