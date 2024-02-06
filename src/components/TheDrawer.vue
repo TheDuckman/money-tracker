@@ -13,7 +13,7 @@
       <template v-for="rType in routeTypes" :key="rType">
         <v-list-subheader>{{ rType }}</v-list-subheader>
         <v-list-item
-          v-for="route in routesIn(rType)"
+          v-for="route in routesByType(rType)"
           :key="route.name"
           :to="route"
           :prepend-icon="route.meta.icon"
@@ -31,15 +31,29 @@
 import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { RouteItemTypes } from "../utils/enums";
-import useEmitter from "@/composables/useEmitter";
-const emitter = useEmitter();
+import { RouteMetaData } from "@/utils/types";
+interface RouteWithMeta {
+  name: string;
+  meta: RouteMetaData;
+}
 
 const router = useRouter();
 const routeTypes = computed(() => Object.values(RouteItemTypes) as string[]);
 const routes = computed(() => {
   return router.options.routes.filter((rt) => rt.meta !== undefined);
 });
-const routesIn = function (rType: string) {
-  return routes.value.filter((r) => r.meta.type === rType);
+const routesByType = function (rType: string): RouteWithMeta[] {
+  return routes.value
+    .filter((r) => r.meta?.type === rType)
+    .map((r) => ({
+      name: (r.name as string) || "",
+      meta: {
+        color: (r.meta?.color as string) || "",
+        icon: (r.meta?.icon as string) || "",
+        title: (r.meta?.title as string) || "",
+        type: (r.meta?.type as string) || "",
+        value: (r.meta?.value as string) || "",
+      },
+    }));
 };
 </script>

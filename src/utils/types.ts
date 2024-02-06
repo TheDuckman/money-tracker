@@ -12,3 +12,11 @@ export interface RecordData {
   amount: number;
   description: string;
 }
+
+export interface RouteMetaData {
+  icon: string;
+  title: string;
+  value: string;
+  color: string;
+  type: string;
+}
