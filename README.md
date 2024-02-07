@@ -44,7 +44,7 @@ then
 ```bash
 yarn dev
 ```
-and the project should be running, locally, in development mode.
+and the project should be running locally in development mode.
 
 ##  Links
 
