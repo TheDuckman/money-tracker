@@ -27,7 +27,7 @@ declare module 'vue' {
     TableView: (typeof import("./src/components/TableView.vue"))["default"]
     TheAppBar: typeof import('./src/components/UI/TheAppBar.vue')['default']
     TheDialog: (typeof import("./src/components/TheDialog.vue"))["default"]
-    TheDrawer: typeof import('./src/components/TheDrawer.vue')['default']
+    TheDrawer: typeof import('./src/components/UI/TheDrawer.vue')['default']
     TheIncomeDialog: (typeof import("./src/components/income/TheIncomeDialog.vue"))["default"]
     TheRecordsDialog: (typeof import("./src/components/TheRecordsDialog.vue"))["default"]
     TheSnackbar: typeof import('./src/components/UI/TheSnackbar.vue')['default']

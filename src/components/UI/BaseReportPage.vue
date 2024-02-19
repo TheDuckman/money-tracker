@@ -8,14 +8,14 @@
     <v-card class="mt-2">
       <v-card-text>
         <v-row>
-          <v-col cols="6">
+          <v-col :cols="$vuetify.display.mobile ? 12 : 6">
             <h2>
               <v-icon class="mr-2" :color="leftColor">{{ leftIcon }}</v-icon
               >{{ leftTitle }}
             </h2>
             <slot name="left"></slot>
           </v-col>
-          <v-col cols="6">
+          <v-col :cols="$vuetify.display.mobile ? 12 : 6">
             <h2>
               <v-icon class="mr-2" :color="rightColor">{{ rightIcon }}</v-icon
               >{{ rightTitle }}

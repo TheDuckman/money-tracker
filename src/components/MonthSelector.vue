@@ -4,7 +4,7 @@
       <v-btn variant="text" icon @click="previousMonth">
         <v-icon>mdi-arrow-left-drop-circle-outline</v-icon>
       </v-btn>
-      <div style="min-width: 300px" class="d-flex justify-center">
+      <div style="min-width: 200px" class="d-flex justify-center">
         <h2>
           <v-icon>mdi-calendar-month</v-icon>
           {{ currentMonth }}
