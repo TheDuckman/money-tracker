@@ -25,7 +25,7 @@ declare module 'vue' {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     TableView: (typeof import("./src/components/TableView.vue"))["default"]
-    TheAppBar: (typeof import("./src/components/TheAppBar.vue"))["default"]
+    TheAppBar: typeof import('./src/components/UI/TheAppBar.vue')['default']
     TheDialog: (typeof import("./src/components/TheDialog.vue"))["default"]
     TheDrawer: typeof import('./src/components/TheDrawer.vue')['default']
     TheIncomeDialog: (typeof import("./src/components/income/TheIncomeDialog.vue"))["default"]
