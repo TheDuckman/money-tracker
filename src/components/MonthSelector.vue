@@ -5,7 +5,7 @@
         <v-icon>mdi-arrow-left-drop-circle-outline</v-icon>
       </v-btn>
       <div style="min-width: 200px" class="d-flex justify-center">
-        <h2>
+        <h2 :class="mobile ? 'text-subtitle-1' : ''">
           <v-icon>mdi-calendar-month</v-icon>
           {{ currentMonth }}
         </h2>
@@ -21,6 +21,7 @@
 import { computed } from "vue";
 import { useStore } from "../store";
 import { storeToRefs } from "pinia";
+import { useDisplay } from "vuetify";
 
 const store = useStore();
 const { selectedDate } = storeToRefs(store);
@@ -32,4 +33,7 @@ const currentMonth = computed(() => {
 });
 const previousMonth = computed(() => store.previousMonth);
 const nextMonth = computed(() => store.nextMonth);
+
+// display
+const { mobile } = useDisplay();
 </script>

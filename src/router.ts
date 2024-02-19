@@ -4,13 +4,19 @@ import TableView from "./pages/TableView.vue";
 import NewExpense from "./pages/NewExpense.vue";
 import NewIncome from "./pages/NewIncome.vue";
 import ChartView from "./pages/ChartView.vue";
+import HomeView from "./pages/HomeView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
-      redirect: "/table",
+      redirect: "/home",
+    },
+    {
+      path: "/home",
+      name: "HomeView",
+      component: HomeView,
     },
     {
       path: "/table",
