@@ -3,10 +3,10 @@
     v-model="snackbar"
     :timeout="2000"
     :min-height="60"
-    :min-width="300"
-    variant="tonal"
-    location="top right"
+    :min-width="200"
+    :location="mobile ? 'top' : 'top right'"
     :color="color"
+    :position="mobile ? 'relative' : undefined"
   >
     <div class="d-flex flex-row align-center">
       <v-icon class="mr-2">{{ icon }}</v-icon>
@@ -18,6 +18,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import useEmitter from "@/composables/useEmitter";
+import { useDisplay } from "vuetify";
 
 const emitter = useEmitter();
 
@@ -25,6 +26,7 @@ const snackbar = ref(false);
 const msg = ref("");
 const icon = ref("");
 const color = ref("");
+const { mobile } = useDisplay();
 
 onMounted(() => {
   emitter.on("success-toast", (toastText: string | null = null) => {

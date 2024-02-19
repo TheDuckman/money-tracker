@@ -15,7 +15,7 @@
   <v-container>
     <v-row>
       <v-col
-        cols="4"
+        :cols="mobile ? 12 : 4"
         v-for="(item, i) in categoryOptions"
         :key="i"
         :value="item"
@@ -35,7 +35,7 @@
   </v-container>
   <!-- AMOUNT -->
   <v-slide-y-transition>
-    <div v-if="selectedCategory">
+    <div v-if="selectedCategory" ref="amountDiv">
       <v-divider class="mb-3"></v-divider>
       <h3>Amount</h3>
       <v-container fluid>
@@ -78,12 +78,12 @@
       >
     </v-container>
     <v-container v-else-if="selectedCategory && record">
-      <div class="justify-space-around d-flex">
-        <v-btn size="x-large" variant="tonal" @click="$emit('cancel')"
+      <div :class="btnDivClass">
+        <v-btn :size="btnSize" variant="tonal" @click="$emit('cancel')"
           >Cancel</v-btn
         >
         <v-btn
-          size="x-large"
+          :size="btnSize"
           variant="tonal"
           color="warning"
           @click="alterRecord"
@@ -110,6 +110,9 @@ import { useStore } from "../../store";
 import useEmitter from "@/composables/useEmitter";
 import { vMaska } from "maska";
 import { onMounted } from "vue";
+import { useDisplay } from "vuetify";
+import { nextTick } from "vue";
+import { useRouter } from "vue-router";
 interface CategoryOption {
   name: string;
   color: string;
@@ -140,6 +143,12 @@ const type = computed(() => props.type);
 const record = computed(() => props.record);
 const store = useStore();
 const emitter = useEmitter();
+// display
+const { mobile } = useDisplay();
+const btnDivClass = computed(() =>
+  mobile ? "justify-space-between d-flex" : "justify-space-around d-flex",
+);
+const btnSize = computed(() => (mobile ? "default" : "x-large"));
 
 // category
 const categories = computed(() => {
@@ -169,6 +178,12 @@ const selectCategory = function (selectedCategory: string) {
       cat.selected = false;
     }
   });
+  nextTick(() =>
+    amountDiv.value
+      ? // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        (amountDiv.value as any).scrollIntoView({ behavior: "smooth" })
+      : null,
+  );
 };
 const resetCategories = function () {
   categoryOptions.forEach((cat) => {
@@ -178,6 +193,7 @@ const resetCategories = function () {
 
 // amount
 const amount = ref("");
+const amountDiv = ref(null);
 const numericAmount = computed(() => Number(amount.value.replaceAll(",", "")));
 const options = reactive({
   mask: "###,###.##",
@@ -214,6 +230,7 @@ const createRecord = function () {
   );
   emitter.emit("success-toast", "New record created");
   clearData();
+  goToTablePage();
 };
 const alterRecord = function () {
   store.alterRecord(
@@ -227,6 +244,7 @@ const alterRecord = function () {
   emit("records-updated");
   emitter.emit("success-toast", "Record altered");
   clearData();
+  goToTablePage();
 };
 const recordRemoved = function () {
   emit("records-updated");
@@ -237,6 +255,12 @@ const fillOutForm = function () {
   date.value = record.value.date;
   description.value = record.value.description;
   amount.value = record.value.amount.toFixed(2);
+};
+
+// redirect
+const router = useRouter();
+const goToTablePage = function () {
+  router.push({ name: "TableView" });
 };
 
 // lifecycle hooks

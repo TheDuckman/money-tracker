@@ -1,7 +1,8 @@
 <template>
   <v-app>
     <v-main class="pb-0">
-      <TheDrawer />
+      <TheAppBar v-if="mobile" />
+      <TheDrawer v-else />
       <TheSnackbar />
       <v-container class="pt-0">
         <router-view v-slot="{ Component }">
@@ -27,6 +28,10 @@
 import { onBeforeMount } from "vue";
 import { useStore } from "@/store";
 import { RecordTypes } from "@/utils/enums";
+import { useDisplay } from "vuetify";
+
+// display
+const { mobile } = useDisplay();
 
 const store = useStore();
 

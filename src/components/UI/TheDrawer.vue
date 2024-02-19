@@ -1,13 +1,17 @@
 <template>
-  <v-navigation-drawer>
-    <v-list>
-      <v-list-item prepend-avatar="@/assets/coin.png">
-        <v-list-item-title class="text-orange">Money Tracker</v-list-item-title>
-        <v-list-item-subtitle>By Gabriel Pato</v-list-item-subtitle>
-      </v-list-item>
-    </v-list>
+  <v-navigation-drawer v-model="drawer">
+    <template v-if="!mobile">
+      <v-list>
+        <v-list-item prepend-avatar="@/assets/coin.png">
+          <v-list-item-title class="text-orange"
+            >Money Tracker</v-list-item-title
+          >
+          <v-list-item-subtitle>By Gabriel Pato</v-list-item-subtitle>
+        </v-list-item>
+      </v-list>
 
-    <v-divider></v-divider>
+      <v-divider></v-divider>
+    </template>
 
     <v-list nav>
       <template v-for="rType in routeTypes" :key="rType">
@@ -28,15 +32,21 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
-import { RouteItemTypes } from "../utils/enums";
+import useEmitter from "@/composables/useEmitter";
+import { RouteItemTypes } from "../../utils/enums";
 import { RouteMetaData } from "@/utils/types";
+import { useDisplay } from "vuetify";
 interface RouteWithMeta {
   name: string;
   meta: RouteMetaData;
 }
 
+// display
+const { mobile } = useDisplay();
+
+// routing
 const router = useRouter();
 const routeTypes = computed(() => Object.values(RouteItemTypes) as string[]);
 const routes = computed(() => {
@@ -56,4 +66,13 @@ const routesByType = function (rType: string): RouteWithMeta[] {
       },
     }));
 };
+
+// toggle stuff
+const emitter = useEmitter();
+const drawer = ref(false);
+onMounted(() => {
+  emitter.on("toggle-drawer", () => {
+    drawer.value = !drawer.value;
+  });
+});
 </script>

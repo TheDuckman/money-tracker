@@ -56,6 +56,6 @@ const chartOptions = reactive<GoogleChartOptions>({
     bold: true,
     italic: false,
   },
-  legend: { textStyle: { color: "white" } },
+  legend: { textStyle: { color: "white" }, position: "bottom" },
 });
 </script>
