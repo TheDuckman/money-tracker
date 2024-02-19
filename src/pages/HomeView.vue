@@ -5,7 +5,6 @@
     </h1>
     <v-card class="mt-2">
       <v-card-text>
-        {{ mobile }}
         <template v-for="rType in routeTypes" :key="rType">
           <h2 class="text-center mt-5">{{ rType }}</h2>
           <v-row class="mt-2 mb-4">
